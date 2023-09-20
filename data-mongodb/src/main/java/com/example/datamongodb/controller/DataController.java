@@ -4,6 +4,7 @@ import com.example.datamongodb.constants.Constants;
 import com.example.datamongodb.model.Person;
 import com.example.datamongodb.services.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class DataController {
     @PostMapping()
     public ResponseEntity<?> postPerson(@RequestBody Person person) {
         try {
-            Person savedPerson = iDataService.save(person);
+            Person savedPerson = iDataService.save(null, person);
             return ResponseEntity.status(HttpStatus.OK).body(savedPerson);
         }catch (Exception exception) {
             //System.out.println(exception.getLocalizedMessage());
@@ -87,6 +88,23 @@ public class DataController {
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_ERROR);
         }
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updatePersonById(@PathVariable String id, @RequestBody Person person) {
+        try {
+            Person newPerson = iDataService.save(id, person);
+            if(newPerson != null) {
+                return  ResponseEntity.status(HttpStatus.OK).body(newPerson);
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_ERROR);
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
+        }
+
+
+
     }
 
 }
