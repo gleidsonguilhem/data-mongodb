@@ -15,4 +15,6 @@ public interface DataRepository extends MongoRepository<Person, String>  {
 
     @Query(value = "{'age':{$gte: ?0, $lte: ?1}}", fields = "{id: 1, name: 1, age: 1}")
     List<Person> getPersonByAgeBetween(Integer minAge, Integer maxAge);
+
+
 }

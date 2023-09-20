@@ -10,4 +10,5 @@ public interface IDataService {
     Optional<Person> getPersonById(String id);
     List<Person> findPersonByNameStartsWith(String name);
     List<Person> getPersonByAgeBetween(Integer minAge, Integer maxAge);
+    List<Person> getAllPersons();
 }

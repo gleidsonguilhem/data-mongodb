@@ -75,4 +75,18 @@ public class DataController {
         }
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<?> getAllPersons() {
+        List<Person> persons = iDataService.getAllPersons();
+        try {
+            if(!persons.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.OK).body(persons);
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.GET_DATA_ERROR);
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_ERROR);
+        }
+    }
+
 }
