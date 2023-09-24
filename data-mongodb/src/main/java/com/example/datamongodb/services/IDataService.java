@@ -11,4 +11,6 @@ public interface IDataService {
     List<Person> findPersonByNameStartsWith(String name);
     List<Person> getPersonByAgeBetween(Integer minAge, Integer maxAge);
     List<Person> getAllPersons();
+
+    void deleteById(String id);
 }

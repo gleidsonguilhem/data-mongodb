@@ -48,4 +48,9 @@ public class DataService implements IDataService {
         return dataRepository.findAll();
     }
 
+    @Override
+    public void deleteById(String id) {
+        dataRepository.deleteById(id);
+    }
+
 }

@@ -4,7 +4,6 @@ import com.example.datamongodb.constants.Constants;
 import com.example.datamongodb.model.Person;
 import com.example.datamongodb.services.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -102,9 +101,18 @@ public class DataController {
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
         }
-
-
-
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deletePersonById(@PathVariable String id) {
+        try{
+            iDataService.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Person deleted successfully");
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
+        }
+    }
+
+
 
 }
