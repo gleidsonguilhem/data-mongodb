@@ -4,6 +4,9 @@ import com.example.datamongodb.model.Person;
 import com.example.datamongodb.repositories.DataRepository;
 import com.example.datamongodb.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,8 +47,9 @@ public class DataService implements IDataService {
     }
 
     @Override
-    public List<Person> getAllPersons() {
-        return dataRepository.findAll();
+    public Page<Person> getAllPersons(Integer number, Integer size) {
+        PageRequest pageRequest = PageRequest.of(number, size);
+        return dataRepository.findAll(pageRequest);
     }
 
     @Override

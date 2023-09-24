@@ -4,6 +4,7 @@ import com.example.datamongodb.constants.Constants;
 import com.example.datamongodb.model.Person;
 import com.example.datamongodb.services.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -76,8 +77,8 @@ public class DataController {
     }
 
     @GetMapping(value = "/all")
-    public ResponseEntity<?> getAllPersons() {
-        List<Person> persons = iDataService.getAllPersons();
+    public ResponseEntity<?> getAllPersons(@RequestParam Integer number, @RequestParam Integer size) {
+        Page<Person> persons = iDataService.getAllPersons(number, size);
         try {
             if(!persons.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.OK).body(persons);
