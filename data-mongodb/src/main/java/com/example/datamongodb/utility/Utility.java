@@ -17,4 +17,16 @@ public class Utility {
                 .build();
     }
 
+    public static String obscurer(String ccNumber) {
+        if(ccNumber.length() > 16 || ccNumber.length() < 12) {
+            return "Invalid credit card number";
+        }
+        String ccObscured = "";
+        for(int x = 0; x < ccNumber.length()-4; x++) {
+            ccObscured += "X";
+        }
+        ccObscured += ccNumber.substring(ccNumber.length()-4);
+        return ccObscured;
+    }
+
 }

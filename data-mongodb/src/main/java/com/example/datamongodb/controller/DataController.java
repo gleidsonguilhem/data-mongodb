@@ -15,7 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/data", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DataController {
-
     @Autowired
     IDataService iDataService;
 
@@ -60,7 +59,6 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.OK).body(Constants.DATA_ERROR);
         }
     }
-
     @GetMapping(value = "/age")
     public ResponseEntity<?> getPersonByAgeBetween(@RequestParam("minAge") Integer minAge,
                                                    @RequestParam("maxAge") Integer maxAge) {
@@ -75,7 +73,6 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.OK).body(Constants.DATA_ERROR);
         }
     }
-
     @GetMapping(value = "/all")
     public ResponseEntity<?> getAllPersons(@RequestParam Integer number, @RequestParam Integer size) {
         Page<Person> persons = iDataService.getAllPersons(number, size);
@@ -89,7 +86,6 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Constants.DATA_ERROR);
         }
     }
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updatePersonById(@PathVariable String id, @RequestBody Person person) {
         try {
@@ -103,17 +99,13 @@ public class DataController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
         }
     }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deletePersonById(@PathVariable String id) {
         try{
             iDataService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Person deleted successfully");
+            return ResponseEntity.status(HttpStatus.OK).body(Constants.DELETED_OK);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Constants.BAD_PUT_REQUEST);
         }
     }
-
-
-
 }

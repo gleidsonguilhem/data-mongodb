@@ -9,4 +9,5 @@ public class DataMongodbApplication {
     public static void main(String[] args) {
         SpringApplication.run(DataMongodbApplication.class, args);
     }
+
 }

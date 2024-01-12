@@ -6,7 +6,6 @@ import com.example.datamongodb.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +15,7 @@ public class DataService implements IDataService {
 
     @Autowired
     DataRepository dataRepository;
+
     @Override
     public Person save(String id, Person person) {
         if(id != null) {
